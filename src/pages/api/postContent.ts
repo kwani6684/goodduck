@@ -7,13 +7,18 @@ export default async function showDate(request: NextApiRequest, response: NextAp
     if (request.method === 'POST') {
         if (request.body.title == '') {
             return response.status(500).json('제목써라')
-          }
-        const data = {
-            title: request.body.title,
-            content:request.body.content
         }
-        await db.collection('post').insertOne(data) 
+        try {
+            const data = {
+                title: request.body.title,
+                content: request.body.content
+            }
+            await db.collection('post').insertOne(data)
 
-        response.redirect(302,'/lists')
+            response.redirect(302, '/lists')
+        }
+        catch(error) {
+            response.redirect(302,'/errorpage')
+        }
     }
 }

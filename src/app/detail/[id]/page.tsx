@@ -1,8 +1,10 @@
 import { connectDB } from "@/util/database";
 import { ObjectId } from "mongodb";
+import Link from "next/link";
 
 
-interface PropType{
+
+export interface PropType{
   params: {
     id: string,
     searchParans:{}
@@ -18,6 +20,7 @@ let result = await db.collection("post").findOne({ _id: new ObjectId(props.param
     <div>
       <h4>Detail</h4>
       <h4>{result.title}</h4>
+      <Link href={`../../edit/${result._id}`}>수정</Link>
       <p>{result.content}</p>
     </div>
   );

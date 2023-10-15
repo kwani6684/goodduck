@@ -1,12 +1,19 @@
-import Date from "@/pages/api/date";
+import { connectDB } from "@/util/database";
+import { ObjectId } from "mongodb";
 
-export default function Write() {
+import { PropType } from "@/app/detail/[id]/page";
+
+export default async function Edit(props: PropType) {
+  const client = (await connectDB) as any;
+  const db = client.db("goodduck");
+  let result = await db.collection("post").findOne({ _id: new ObjectId(props.params.id) });
+
   return (
     <div>
-      <form action="api/postContent" method="post">
+      <form action="/api/editContent" method="POST">
         <div className="py-12 px-12 lg:px-80 md:px-30">
           <div className="border-b border-gray-900/10 pb-12">
-            <h4 className="text-base pt-4 font-semibold leading-7 text-gray-900">Write Article</h4>
+            <h4 className="text-base pt-4 font-semibold leading-7 text-gray-900">Edit Article</h4>
             <p className="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-4">
@@ -22,12 +29,12 @@ export default function Write() {
                       id="title"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                       placeholder="title"
-                      
+                      defaultValue={result.title}
                     />
                   </div>
                 </div>
               </div>
-
+                <input type="text" name="_id" id="_id" defaultValue={result._id.toString()} className="hidden"/>
               <div className="col-span-full">
                 <label htmlFor="postContent" className="block text-sm font-medium leading-6 text-gray-900">
                   Content
@@ -38,7 +45,7 @@ export default function Write() {
                     name="content"
                     rows={10}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    defaultValue={""}
+                    defaultValue={result.content}
                     placeholder="content"
                   />
                 </div>

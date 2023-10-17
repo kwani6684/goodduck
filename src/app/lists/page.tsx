@@ -1,6 +1,7 @@
 import { connectDB } from "@/util/database";
 import { ObjectId } from "mongodb";
 import Link from "next/link";
+import ListItem from "./ListItem";
 
 export interface PostType {
   _id: string;
@@ -21,14 +22,7 @@ export default async function List() {
         </div>
         <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-6 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {post.map((item: PostType, i: number) => (
-            <Link href={`../detail/${item._id}`}> 
-            <article key={i} className="flex rounded-lg bg-emerald-100 shadow-lg px-4 pb-4 max-w-xl flex-col items-start justify-between">
-              <div className="group relative">
-                <h3 className="mt-3 text-lg font-semibold leading-6  text-gray-900 group-hover:text-gray-600">{item.title}</h3>
-                <p className="mt-5 line-clamp-3 text-sm leading-6  text-gray-600">{item.content}</p>
-              </div>
-              </article>
-              </Link>
+            <ListItem {...item} key={i} />
           ))}
         </div>
       </div>

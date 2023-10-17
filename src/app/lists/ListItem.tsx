@@ -5,7 +5,7 @@ import { PostType } from "./page";
 import axios from "axios";
 export default function ListItem(props: PostType) {
   return (
-    <div>
+    <div className="list transition-all duration-700">
       <Link href={`../detail/${props._id}`}>
         <article className="flex group  rounded-lg bg-emerald-100 shadow-lg px-4 pb-4 max-w-xl flex-col hover:bg-emerald-400 hover:shadow-2xl items-start justify-between">
           <div className="relative">
@@ -15,8 +15,16 @@ export default function ListItem(props: PostType) {
         </article>
       </Link>
       <button
-        onClick={() => {
-          axios.post("api/deleteContent", props);
+              onClick={(e) => {
+                  const parentElement = e.currentTarget.parentElement;
+                  fetch("api/deleteContent", { method: "DELETE", body: props._id }).then(() => {
+                      if (parentElement) {
+                          parentElement.style.opacity = "0"
+                          setTimeout(() => {
+                              parentElement.style.display="none"
+                          },700)
+                      }
+          })
         }}
       >
         🗑️

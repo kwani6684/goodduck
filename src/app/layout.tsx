@@ -15,6 +15,13 @@ export interface MenuProps {
   name: string;
   href: string;
 }
+export interface SessionType {
+  user: {
+    name: string;
+    email: string;
+    role: string;
+  };
+}
 
 const navigation: MenuProps[] = [
   { name: "Category", href: "/category" },
@@ -24,9 +31,9 @@ const navigation: MenuProps[] = [
 ];
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  let session = await getServerSession(authOptions);
+  let session: SessionType | null = await getServerSession(authOptions);
   if (session) {
-    console.log(session);
+    console.log(session.user.role);
   }
   return (
     <html lang="en">
@@ -40,7 +47,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           </div>
 
           <div className=" flex lg:hidden">
-            <DropMenu menu={navigation} />
+            <span className="mr-4 font-semibold">{session?.user.name}</span>
+            <DropMenu menu={navigation} session={session} />
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item) => (
@@ -52,7 +60,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             {session ? (
               <span>
-                {session.user?.name}
+                <span className="font-semibold mr-4">{session.user.name}</span>
+                {/* <span className="font-semibold mr-4">{session.user?.name}</span> */}
+
                 <LogoutBtn />
               </span>
             ) : (
@@ -60,7 +70,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             )}
           </div>
         </nav>
-
         {children}
       </body>
     </html>

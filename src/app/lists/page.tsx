@@ -2,16 +2,22 @@ import { connectDB } from "@/util/database";
 import { ObjectId } from "mongodb";
 import Link from "next/link";
 import ListItem from "./ListItem";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 export interface PostType {
   _id: string;
   title: string;
   content: string;
+  writer: string;
+  email: string;
+  date: Date;
 }
 
 export default async function List() {
   const client = (await connectDB) as any;
   const db = client.db("goodduck");
+  let session = await getServerSession(authOptions)
   let post = await db.collection("post").find().toArray();
   return (
     <div className="bg-white py-24 sm:py-32">

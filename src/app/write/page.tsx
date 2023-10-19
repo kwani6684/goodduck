@@ -1,4 +1,4 @@
-import Date from "@/pages/api/date";
+
 
 export default function Write() {
   return (

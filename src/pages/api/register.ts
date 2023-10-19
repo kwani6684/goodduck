@@ -9,33 +9,37 @@ export default async function handler(request: NextApiRequest, response: NextApi
 
   const req = request.body;
     if (request.method === "POST") {
-    if (info.length > 0) {
-      for (let i = 0; i < info.length; i++) {
-        if (req.email == info[i].email) {
-          console.log(info[i].email);
-          return response.status(500).json("email 중복");
+        if (req.email != "" && req.password != "" && req.name != "") {
+            if (info.length > 0) {
+                for (let i = 0; i < info.length; i++) {
+                  if (req.email == info[i].email) {
+                    console.log(info[i].email);
+                    return response.status(500).json("email 중복");
+                  }
+                }
+              }
+              if (req.password != req.passwordCheck) {
+                return response.status(500).json("비번다름");
+              }
+              const hash = await bcrypt.hash(req.password, 10);
+              const hashCheck = await bcrypt.hash(req.passwordCheck, 10);
+              req.password = hash;
+              req.passwordCheck = hashCheck;
+              try {
+                const data = {
+                    ...req,
+                    role:'normal'
+                };
+                console.log(data);
+          
+                await db.collection("userinfo").insertOne(data);
+          
+                response.redirect(302, "/lists");
+              } catch (error) {
+                response.redirect(302, "/errorpage");
+              }
         }
-      }
-    }
-    if (req.password != req.passwordCheck) {
-      return response.status(500).json("비번다름");
-    }
-    const hash = await bcrypt.hash(req.password, 10);
-    const hashCheck = await bcrypt.hash(req.passwordCheck, 10);
-    req.password = hash;
-    req.passwordCheck = hashCheck;
-    try {
-      const data = {
-          ...req,
-          role:'normal'
-      };
-      console.log(data);
-
-      await db.collection("userinfo").insertOne(data);
-
-      response.redirect(302, "/lists");
-    } catch (error) {
-      response.redirect(302, "/errorpage");
-    }
+        else{ return response.status(500).json("정보를 입력해");}
+    
   }
 }

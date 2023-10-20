@@ -17,12 +17,12 @@ export default async function deleteContent(request: NextApiRequest, response: N
   const db = client.db("goodduck");
 
   if ((request.method = "DELETE")) {
-    let id = request.body;
-    let query = { _id: new ObjectId(id) };
+    
+    let query = { _id: new ObjectId(request.body) };
     const result = await db.collection("post").findOne(query);
     if (session?.user.email == result.email || session?.user.role == "admin") {
       await db.collection("post").deleteOne(query);
-      response.status(202).send(`Successfully removed game with id ${id}`);
+      response.status(202).send(`Successfully removed game with id ${request.body}`);
     } else {
       return response.status(500).json("권한이 없습니다.");
     }

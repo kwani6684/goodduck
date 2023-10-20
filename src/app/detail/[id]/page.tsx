@@ -1,6 +1,7 @@
 import { connectDB } from "@/util/database";
 import { ObjectId } from "mongodb";
 import Link from "next/link";
+import Comment from "./Comment";
 
 
 
@@ -13,7 +14,7 @@ export interface PropType{
 export default async function Detail(props:PropType) {
   const client = (await connectDB) as any;
   const db = client.db("goodduck");
-let result = await db.collection("post").findOne({ _id: new ObjectId(props.params.id) });
+  let result = await db.collection("post").findOne({ _id: new ObjectId(props.params.id) });
     
   console.log(props);
   return (
@@ -22,6 +23,7 @@ let result = await db.collection("post").findOne({ _id: new ObjectId(props.param
       <h4>{result.title}</h4>
       <Link href={`../../edit/${result._id}`}>수정</Link>
       <p>{result.content}</p>
+      <Comment resultId={result._id.toString()} />
     </div>
   );
 }

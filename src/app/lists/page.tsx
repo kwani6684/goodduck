@@ -11,6 +11,7 @@ export interface PostType {
   content: string;
   writer: string;
   email: string;
+  category: string;
   date: Date;
 }
 

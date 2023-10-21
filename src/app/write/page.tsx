@@ -2,7 +2,6 @@ import { connectDB } from "@/util/database";
 
 export interface CategoryType{
   _id: string,
-  key: string,
   value:string
 }
 
@@ -51,7 +50,7 @@ export default async function Write() {
                     >
                       {category.map((item:CategoryType, i:number) => {
                         return (
-                          <option key={i} value={item.key}>{item.value}</option>
+                          <option key={i} value={item.value}>{item.value}</option>
                         )
                       })}
                      

@@ -17,7 +17,8 @@ export default async function showDate(request: NextApiRequest, response: NextAp
                 title: request.body.title,
                 content: request.body.content,
                 writer: session?.user?.name,
-                email:session?.user?.email,
+                email: session?.user?.email,
+                category:request.body.category,
                 date:now
                 
             }

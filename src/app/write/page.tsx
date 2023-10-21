@@ -1,6 +1,16 @@
+import { connectDB } from "@/util/database";
 
+export interface CategoryType{
+  _id: string,
+  key: string,
+  value:string
+}
 
-export default function Write() {
+export default async function Write() {
+  const client = (await connectDB) as any;
+  const db = client.db("goodduck");
+  let category = await db.collection("category").find().toArray();
+  
   return (
     <div>
       <form action="api/postContent" method="post">
@@ -22,8 +32,30 @@ export default function Write() {
                       id="title"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                       placeholder="title"
-                      
                     />
+                  </div>
+                </div>
+              </div>
+              <div className="sm:col-span-1.5">
+                <label htmlFor="postTitle" className="block text-sm font-medium leading-6 text-gray-900">
+                  Category
+                </label>
+                <div className="mt-2">
+                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                    <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm"></span>
+                    
+                    <select
+                      name="category"
+                      id="category"
+                      className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                    >
+                      {category.map((item:CategoryType, i:number) => {
+                        return (
+                          <option key={i} value={item.key}>{item.value}</option>
+                        )
+                      })}
+                     
+                    </select>
                   </div>
                 </div>
               </div>

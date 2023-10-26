@@ -38,7 +38,7 @@ export default function Editor() {
     'code-block',
   ];
 
-  const handleEditorChange = (newContent: any) => {
+  const handleEditorChange = (newContent: string) => {
       setContent(newContent);
       console.log(content)
   };

@@ -11,9 +11,7 @@ h2 {
 h3 {
   @apply text-xl;
 }
-a {
-  @apply text-blue-600 ;
-}
+
 .ql-align-center {
   @apply text-center;
 

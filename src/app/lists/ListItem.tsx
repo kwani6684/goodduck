@@ -4,6 +4,9 @@ import Link from "next/link";
 import { PostType } from "./page";
 import axios from "axios";
 export default function ListItem(props: PostType) {
+  // const content = ({props.content}:any)=> {
+  //   return <div dangerouslySetInnerHTML={{ __html: props.content }} />;
+  // }
   return (
     <div className="list transition-all duration-700">
       <Link href={`../detail/${props._id}`}>
@@ -12,7 +15,7 @@ export default function ListItem(props: PostType) {
           <p className="mt-5 line-clamp-3 text-sm leading-6  text-gray-600">{props.category}</p>
 
             <h3 className="mt-3 text-lg font-semibold leading-6  text-gray-900 group-hover:text-gray-600">{props.title}</h3>
-            <p className="mt-5 line-clamp-3 text-sm leading-6  text-gray-600">{props.content}</p>
+            <div dangerouslySetInnerHTML={{__html:props.content}} className="mt-5 line-clamp-3 text-sm leading-6  text-gray-600"></div>
             <p className="mt-3 line-clamp-3 text-sm leading-6  text-gray-800">{props.writer}</p>
             {/* date 추가해야댐 */}
           </div>

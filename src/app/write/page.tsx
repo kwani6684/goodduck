@@ -1,6 +1,7 @@
 import { connectDB } from '@/util/database';
 import Editor from './Editor';
 import Quill from 'quill';
+
 // import dynamic from 'next/dynamic';
 export interface CategoryType {
   _id: string;

@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { ObjectId } from "mongodb";
-import { useEffect, useState } from "react";
+import { ObjectId } from 'mongodb';
+import { useEffect, useState } from 'react';
 
 interface CommentType {
   comment: String;
@@ -11,7 +11,7 @@ interface CommentType {
   date: string;
 }
 export default function Comment({ resultId }: any) {
-  let [comment, setComment] = useState("");
+  let [comment, setComment] = useState('');
   let [data, setData] = useState<CommentType[]>([]);
   useEffect(() => {
     fetch(`/api/comment/getComment?id=${resultId}`)
@@ -30,7 +30,7 @@ export default function Comment({ resultId }: any) {
       />
       <button
         onClick={() => {
-          fetch(`/api/comment/postComment`, { method: "POST", body: JSON.stringify({ comment: comment, parent: resultId }) }).then((response) => {
+          fetch(`/api/comment/postComment`, { method: 'POST', body: JSON.stringify({ comment: comment, parent: resultId }) }).then((response) => {
             if (response.ok) {
               // fetch("/api/comment/getComment")
               // .then((r) => r.json())
@@ -46,7 +46,7 @@ export default function Comment({ resultId }: any) {
         data.map((item, i): any => {
           return (
             <div key={i}>
-              <span className="mr-4">{item.writer}</span>
+              <span className='mr-4'>{item.writer}</span>
               <span>{item.comment}</span>
             </div>
           );

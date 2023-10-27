@@ -1,8 +1,9 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import 'react-quill/dist/quill.snow.css'; // Import Quill styles
+import 'react-quill/dist/quill.snow.css'; 
 import { PostType } from '../lists/page';
+import Link from 'next/link';
 
 export interface CategoryType {
   _id: string;
@@ -91,7 +92,7 @@ export default function Editor({ category }: any) {
 
               <select
                 onChange={(e) => {
-                  // console.log(thisCategory)
+                  
                   setThisCategory(e.currentTarget.value);
 
                 }}
@@ -140,14 +141,13 @@ export default function Editor({ category }: any) {
           type='button' className='text-lg font-semibold leading-6 text-gray-900'>
           Cancel
         </button>
-        <button
+        <Link
+          href='/lists'
           onClick={() => {
             fetch(`/api/postContent`, { method: "POST", body: JSON.stringify({ title: title, category: thisCategory,content:content }) }).then((response) => {
               if (response.ok) {
-                // fetch("/api/comment/getComment")
-                // .then((r) => r.json())
-                // .then((result) => setData(result));
-                // 댓글 바로 보여주는 코드 필요
+                console.log("yaho")
+             // '/lists' 로 페이지 이동하는 코드
               }
             });
           }}
@@ -155,7 +155,7 @@ export default function Editor({ category }: any) {
           className='rounded-md bg-indigo-600 px-3 py-2 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
         >
           Submit
-        </button>
+        </Link>
       </div>
     </div>
   );

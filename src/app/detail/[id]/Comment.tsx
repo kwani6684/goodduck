@@ -18,6 +18,13 @@ export default function Comment({ resultId }: any) {
       .then((r) => r.json())
       .then((result) => setData(result));
   }, []);
+
+  const updateCommentList = () => {
+    // 댓글 목록을 업데이트하는 함수
+    fetch(`/api/comment/getComment?id=${resultId}`)
+      .then((r) => r.json())
+      .then((result) => setData(result));
+  };
   return (
     <div>
       <div>댓글</div>
@@ -36,6 +43,7 @@ export default function Comment({ resultId }: any) {
               // .then((r) => r.json())
               // .then((result) => setData(result));
               // 댓글 바로 보여주는 코드 필요
+              updateCommentList();
             }
           });
         }}

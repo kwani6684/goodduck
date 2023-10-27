@@ -2,3 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+h1 {
+  @apply text-3xl;
+}
+h2 {
+  @apply text-2xl;
+}
+h3 {
+  @apply text-xl;
+}
+a {
+  @apply text-blue-600 ;
+}
+.ql-align-center {
+  @apply text-center;
+
+  ol {
+    @apply list-inside list-decimal py-3;
+  }
+
+  ul {
+    @apply list-inside list-disc py-3;
+  }
+
+  blockquote {
+    @apply bg-gray-50 border-l border-indigo-200 p-2;
+  }
+
+  pre {
+    @apply bg-gray-50 p-2 my-2 text-sm;
+  }
+}

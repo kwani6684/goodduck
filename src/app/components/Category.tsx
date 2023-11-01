@@ -13,8 +13,8 @@ export default function Category({ category }: CategoryProps) {
       <div className='grid grid-cols-2 sm:grid-cols-4 gap-20'>
         {category.map((item, i) => {
           return (
-              <Link
-                  href={`../category/${item.value}`}
+            <Link
+              href={`../category/${encodeURIComponent(item.value)}`}
               key={i}
               className='relative inline-block w-[150px] h-[150px] border-0 border-yellow-500 p-2 rounded-3xl  hover:shadow-2xl hover:border-4 hover:transition:1 sm:w-[200px] sm:h-[200px]'
             >

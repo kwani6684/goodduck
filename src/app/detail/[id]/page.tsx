@@ -7,7 +7,7 @@ import dompurify from 'isomorphic-dompurify';
 export interface PropType {
   params: {
     id: string;
-    searchParans: {};
+    searchParams: {};
   };
 }
 export default async function Detail(props: PropType) {

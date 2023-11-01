@@ -16,7 +16,7 @@ export default function Category({ category }: CategoryProps) {
             <Link
               href={`../category/${encodeURIComponent(item.value)}`}
               key={i}
-              className='relative inline-block w-[150px] h-[150px] border-0 border-yellow-500 p-2 rounded-3xl  hover:shadow-2xl hover:border-4 hover:transition:1 sm:w-[200px] sm:h-[200px]'
+              className='relative inline-block w-[150px] h-[150px] border-0 border-yellow-900 p-2 rounded-3xl  hover:shadow-2xl hover:border-4 hover:transition:1 sm:w-[200px] sm:h-[200px]'
             >
               <Image src={acorn} alt='acorn' className='object-cover'></Image>
               <div className='absolute left-0 right-8 top-0 bottom-0 flex items-center justify-center'>

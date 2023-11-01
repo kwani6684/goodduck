@@ -48,7 +48,7 @@ export default async function Home() {
             </h2>
             <p className='font-light text-gray-600 mb-6 leading-relaxed'>
               세상에는 다양한 사람이 있는만큼 관심사도 많죠!! <br />
-              다람쥐굴에서 내 관심사와 사람들의 관심사를 공유해보세요!!
+              다람쥐굴에서 관심사를 공유해보세요!!
             </p>
             <Link
               href='/category'

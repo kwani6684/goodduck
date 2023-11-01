@@ -1,6 +1,7 @@
-'use client'
+'use client';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import acorn from'../../../public/acorn.png'
 
 export default function ImageFromHtml({ content }: { content: string }) {
   const [firstImageURL, setFirstImageURL] = useState<string | null>(null);
@@ -21,10 +22,8 @@ export default function ImageFromHtml({ content }: { content: string }) {
   }, [content]);
 
   return (
-    <div className='pb-2 h-[200px] dark:bg-neutral-800 rounded-2xl flex items-center justify-center'>
-      {firstImageURL && (
-        <img className=' object-fill max-w-full max-h-full' src={firstImageURL} alt='Thumbnail' />
-      )}
+    <div className=' h-[200px] dark:bg-neutral-800 rounded-t-2xl flex items-center justify-center'>
+      {!firstImageURL ? <Image className=' object-fill max-w-full max-h-full' src={acorn} alt='default Image' /> : <img className=' object-fill max-w-full max-h-full' src={firstImageURL} alt='Thumbnail' />}
     </div>
   );
 }

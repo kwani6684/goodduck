@@ -1,8 +1,8 @@
-import { connectDB } from "@/util/database";
-import NextAuth, { AuthOptions, User } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcrypt";
+import { connectDB } from '@/util/database';
+import NextAuth, { AuthOptions, User } from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import bcrypt from 'bcrypt';
 
 interface CustomCredentials {
   email: string;
@@ -17,28 +17,28 @@ export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       //1. 로그인페이지 폼 자동생성해주는 코드
-      name: "credentials",
+      name: 'credentials',
       credentials: {
-        email: { label: "email", type: "text" },
-        password: { label: "password", type: "password" },
+        email: { label: 'email', type: 'text' },
+        password: { label: 'password', type: 'password' },
       },
 
       //2. 로그인요청시 실행되는코드
       //직접 DB에서 아이디,비번 비교하고
       //아이디,비번 맞으면 return 결과, 틀리면 return null 해야함
-      async authorize(credentials: Record<"email" | "password", string> | undefined): Promise<User | null> {
-        let db = (await connectDB).db("goodduck");
-        let user = await db.collection("userinfo").findOne({ email: credentials?.email });
+      async authorize(credentials: Record<'email' | 'password', string> | undefined): Promise<User | null> {
+        let db = (await connectDB).db('goodduck');
+        let user = await db.collection('userinfo').findOne({ email: credentials?.email });
         console.log(user);
         if (!user) {
-          console.log("해당 이메일은 없음");
+          console.log('해당 이메일은 없음');
           return null;
         }
         const { _id, ...userData } = user;
         if (credentials) {
           const pwcheck = await bcrypt.compare(credentials.password, user.password);
           if (!pwcheck) {
-            console.log("비번틀림");
+            console.log('비번틀림');
             return null;
           }
         }
@@ -52,7 +52,7 @@ export const authOptions: AuthOptions = {
     // }),
   ],
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
     maxAge: 30 * 24 * 60 * 60, //30일
   },
 
@@ -65,6 +65,7 @@ export const authOptions: AuthOptions = {
         token.user.name = user.username;
         token.user.email = user.email;
         token.user.role = user.role;
+        token.user.url = user.url;
       }
       return token;
     },

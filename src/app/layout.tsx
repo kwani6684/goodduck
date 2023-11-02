@@ -20,6 +20,7 @@ export interface SessionType {
     name: string;
     email: string;
     role: string;
+    url?: string;
   };
 }
 
@@ -32,12 +33,12 @@ const navigation: MenuProps[] = [
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   let session: SessionType | null = await getServerSession(authOptions);
   if (session) {
-    console.log(session.user.role);
+    console.log(session.user);
   }
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <nav className=' flex justify-between bg-yellow-700 p-6 lg:px-8' aria-label='Global'>
+        <nav className=' flex justify-between items-center bg-yellow-700 p-6 lg:px-8' aria-label='Global'>
           <div className='flex lg:flex-1'>
             <Link href='/' className='-m-1.5 p-1.5'>
               <span className='sr-only'>Your Company</span>
@@ -49,7 +50,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <span className='mr-4 font-semibold text-white '>{session?.user.name}</span>
             <DropMenu menu={navigation} session={session} />
           </div>
-          <div className='hidden lg:flex lg:gap-x-12'>
+          <div className='hidden  lg:flex lg:gap-x-12'>
             {navigation.map((item) => (
               <Link key={item.name} href={item.href} className='text-sm font-semibold leading-6 text-white hover:text-yellow-900'>
                 {item.name}
@@ -65,12 +66,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           </div>
           <div className='hidden lg:flex lg:flex-1 lg:justify-end text-white '>
             {session ? (
-              <span>
-                <span className='font-semibold mr-4'>{session.user.name}</span>
-                {/* <span className="font-semibold mr-4">{session.user?.name}</span> */}
-
-                <LogoutBtn />
-              </span>
+              <span className='flex items-center'>
+              <div className='flex items-center'>
+                <img
+                  src={session.user.url}
+                  className='mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[50px] h-[50px]'
+                  alt='Avatar'
+                />
+              </div>
+              <span className='font-semibold ml-4 mr-4'>{session.user.name}</span>
+              <LogoutBtn />
+            </span>
             ) : (
               <span>
                 <Link href='/register' className='font-semibold mr-4 text-white hover:text-yellow-900 '>

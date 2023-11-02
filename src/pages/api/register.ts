@@ -1,13 +1,18 @@
 import { connectDB } from "@/util/database";
 import { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcrypt";
-
+import squriell from '../../../public/sqirell.jpg'
 export default async function handler(request: NextApiRequest, response: NextApiResponse) {
   const client = (await connectDB) as any;
   const db = client.db("goodduck");
   const info = await db.collection("userinfo").find().toArray();
 
   const req = request.body;
+  
+  let imageUrl = `https://goodduckbucket.s3.ap-northeast-2.amazonaws.com/${encodeURIComponent(req.profileImage)}`
+  if (req.profileImage==='') {
+    imageUrl =`https://goodduckbucket.s3.ap-northeast-2.amazonaws.com/default/sqirell.jpg`
+  }
     if (request.method === "POST") {
         if (req.email != "" && req.password != "" && req.name != "") {
             if (info.length > 0) {
@@ -28,9 +33,11 @@ export default async function handler(request: NextApiRequest, response: NextApi
               try {
                 const data = {
                     ...req,
-                    role:'normal'
+                  role: 'normal',
+                  url:imageUrl
+                  
                 };
-                console.log(data);
+                console.log(request.body);
           
                 await db.collection("userinfo").insertOne(data);
           

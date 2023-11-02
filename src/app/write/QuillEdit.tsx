@@ -70,26 +70,7 @@ export default function Editor({ category }: any) {
   useEffect(() => {
     console.log(thisCategory);
   }, [thisCategory]);
-  // const quillModules = useMemo(() => {
-  //   return {
-  //     toolbar: {
-  //       container:[
-  //       [{ header: [1, 2, 3, false] }],
-  //       ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-  //       [{ list: 'ordered' }, { list: 'bullet' }],
-  //
-  //       ['image'],
-  //       [{ align: [] }],
-  //       [{ color: [] }],
-  //       ['code-block'],
-  //       ['clean'],
-  //       ]
-  //     },
-  //     handlers: {
-  //       image: imageHandler,
-  //     },
-  //   };
-  // }, []);
+ 
   const quillModules = useMemo(() => {
     return {
       toolbar: {

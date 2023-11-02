@@ -25,7 +25,7 @@ export default async function QuillEditor() {
         <div className='pt-12 px-12 lg:px-80 md:px-30'>
           <div className='border-b border-gray-900/10 pb-12'>
             <h4 className='text-base pt-4 font-semibold leading-7 text-gray-900'>QuillEditor Article</h4>
-            <p className='mt-1 text-sm leading-6 text-gray-600'>Use a permanent address where you can receive mail.</p>
+            <p className='mt-1 text-sm leading-6 text-gray-600'>❗️이미지를 업로드 할 때 꼭 에디터의 <span className='text-rose-700 font-semibold'>이미지버튼</span> 을 클릭해서 업로드 해주세요🙏 (기능개발중🛠️)</p>
 
             <Editor category={category}></Editor>
           </div>

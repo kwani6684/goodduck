@@ -30,11 +30,11 @@ export default function ListPreview(props: PostType) {
             <span className='flex-end flex  text-right'>{props.category}</span>
           </div>
 
-          <p className='mb-4 text-base text-neutral-600 dark:text-neutral-200' dangerouslySetInnerHTML={{ __html: sanitizer(replaceTagsWithBr(props.content)) }}></p>
-          <p className='mb-2 text-base text-neutral-600 dark:text-neutral-200'>
-            <p>{props.writer}</p>
+          <div className='mb-4 text-base text-neutral-600 dark:text-neutral-200' dangerouslySetInnerHTML={{ __html: sanitizer(replaceTagsWithBr(props.content)) }}></div>
+          <div className='mb-2 text-base text-neutral-200'>
+            <div><span className="text-neutral-400">by </span>{props.writer}</div>
             <small>{props.date.toLocaleString()}</small>
-          </p>
+          </div>
         </div>
       </div>
     </Link>

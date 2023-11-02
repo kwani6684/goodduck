@@ -12,7 +12,6 @@ export default async function Home() {
   let result = await db.collection('post').find().toArray(); //post collection의 모든데이터를 어레이에 담아줌
   let category: CategoryType[] = await db.collection('category').find().toArray();
 
-  
   return (
     <div>
       <div className='relative w-full py-12 px-12 bg-yellow-900'>
@@ -25,13 +24,6 @@ export default async function Home() {
       </div>
       <Category category={category} />
       <div className='grid grid-cols-1 sm:grid-cols-2 '>
-        <div className='bg-white p-24 flex justify-end items-center'>
-          <img
-            src='https://images.unsplash.com/photo-1501631259223-89d4e246ed23?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1960&q=80'
-            className='max-w-md'
-          />
-        </div>
-
         <div className='bg-gray-100 py-12 px-24 flex justify-start items-center'>
           <div className='max-w-md'>
             <div className='w-24 h-2 bg-yellow-800 mb-4'></div>
@@ -46,14 +38,14 @@ export default async function Home() {
               다람쥐굴에서 관심사를 공유해보세요!!
             </p>
             <Link
-              href='/category'
+              href='/'
               className='inline-block border-2 border-yellow-800 font-light text-yellow-800 text-sm uppercase tracking-widest py-3 px-8 hover:bg-yellow-800 hover:text-white'
             >
               카테고리 보러가기
             </Link>
           </div>
         </div>
-        <div className='bg-gray-100 py-12 pr-12 flex justify-end items-center'>
+        <div className='bg-gray-100 py-12 px-24 flex justify-start items-center'>
           <div className='max-w-md'>
             <div className='w-24 h-2 bg-yellow-800 mb-4 '></div>
             <h2 className='font-display font-bold text-4xl leading-normal  mb-6'>

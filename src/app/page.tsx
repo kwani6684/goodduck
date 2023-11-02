@@ -12,7 +12,7 @@ export default async function Home() {
   let result = await db.collection('post').find().toArray(); //post collection의 모든데이터를 어레이에 담아줌
   let category: CategoryType[] = await db.collection('category').find().toArray();
 
-  console.log(result);
+  
   return (
     <div>
       <div className='relative w-full py-12 px-12 bg-yellow-900'>

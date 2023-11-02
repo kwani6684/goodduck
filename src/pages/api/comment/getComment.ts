@@ -6,6 +6,7 @@ export default async function handler(request:NextApiRequest, response:NextApiRe
     const db = (await connectDB).db('goodduck')
     const id = request.query.id as string;
     console.log(id);
-    let result = await db.collection('comment').find({ parent : new ObjectId(id) }).toArray()
+  let result = await db.collection('comment').find({ parent: new ObjectId(id) }).toArray()
+  
     response.status(200).json(result)
   }

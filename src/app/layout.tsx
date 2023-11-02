@@ -20,7 +20,7 @@ export interface SessionType {
     name: string;
     email: string;
     role: string;
-    url?: string;
+    image?: string;
   };
 }
 
@@ -69,7 +69,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               <span className='flex items-center'>
               <div className='flex items-center'>
                 <img
-                  src={session.user.url}
+                  src={session.user.image}
                   className='mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[50px] h-[50px]'
                   alt='Avatar'
                 />

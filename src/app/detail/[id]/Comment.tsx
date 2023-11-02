@@ -11,6 +11,24 @@ interface CommentType {
   parent: string;
   date: string;
 }
+function getRelativeTime(date:any) {
+  const now = new Date() as any;
+  const diff = now - date;
+  const seconds = Math.floor(diff / 1000);
+  const minutes = Math.floor(seconds / 60);
+  console.log(diff)
+
+  if (minutes < 1) {
+    return '방금 전';
+  } else if (minutes < 60) {
+    return `${minutes}분 전`;
+  } else if (minutes < 1440) {
+    const hours = Math.floor(minutes / 60);
+    return `${hours}시간 전`;
+  } else {
+    return date.toLocaleString(); // 더 오래된 경우 날짜를 표시
+  }
+}
 export default function Comment({ resultId }: any) {
   let [comment, setComment] = useState('');
   let [data, setData] = useState<CommentType[]>([]);
@@ -56,12 +74,15 @@ export default function Comment({ resultId }: any) {
       {data.length > 0 ? (
         data.map((item, i): any => {
           return (
-            <div className='flex items-center py-6' key={i}>
-              <div className='flex items-center'>
-                <img src={item.url} className='mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[50px] h-[50px]' alt='Avatar' />
+            <div key={i}>
+              <div className='flex items-center pt-4' >
+                <div className='flex items-center'>
+                  <img src={item.url} className='mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[50px] h-[50px]' alt='Avatar' />
+                </div>
+                <span className='pl-4 font-semibold'>{item.writer}</span>
+                <span className='pl-4'>{item.comment}</span>
               </div>
-              <span className='pl-4'>{item.writer}</span>
-              <span className='pl-4'>{item.comment}</span>
+              <small className='inline-block pl-16 pb-2'>{getRelativeTime(new Date(item.date))}</small>
             </div>
           );
         })

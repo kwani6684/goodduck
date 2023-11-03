@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 
 export default function ProfileImage() {
@@ -48,7 +49,13 @@ export default function ProfileImage() {
           }
         }}
       />
-      <img src={src} />
+      <div className='flex items-center'>
+                <Image
+                  src={src}
+                  className='mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[50px] h-[50px]'
+                  alt='Avatar'
+                />
+              </div>
     </div>
   );
 }

@@ -9,6 +9,7 @@ import LoginBtn from './account/login/LoginBtn';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import LogoutBtn from './account/login/LogoutBtn';
+import Image from 'next/image';
 const inter = Inter({ subsets: ['latin'] });
 
 export interface MenuProps {

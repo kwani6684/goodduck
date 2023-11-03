@@ -5,18 +5,16 @@ import dompurify from 'isomorphic-dompurify';
 
 export default function ListPreview(props: PostType) {
   const sanitizer = dompurify.sanitize;
-  function replaceTagsWithBr(text:string) {
+  function replaceTagsWithBr(text: string) {
     // 정규식을 사용하여 문자열 사이의 태그를 모두 제거
     const textWithoutTags = text.replace(/<[^>]+>/g, '');
-  
+
     // 문자열을 줄 바꿈 태그로 나누고, 각 부분을 <br/>으로 연결
     const lines = textWithoutTags.split(/[\n\r]+/);
-      const textWithBr = lines.join('<br/>');
-      const displayText = lines.slice(0, 10).join();
-      const line = displayText.substr(0,30)+' <span style="color:gray"> ...<span><p style="color:gray">더보기<p>'
-      console.log(line)
+    const displayText = lines.slice(0, 10).join();
+    const line = displayText.substr(0, 30) + ' <span style="color:gray"> ...<span><p style="color:gray">더보기<p>';
+    console.log(line);
 
-  
     return line;
   }
   return (
@@ -30,9 +28,15 @@ export default function ListPreview(props: PostType) {
             <span className='flex-end flex  text-right'>{props.category}</span>
           </div>
 
-          <div className='mb-4 text-base text-neutral-600 dark:text-neutral-200' dangerouslySetInnerHTML={{ __html: sanitizer(replaceTagsWithBr(props.content)) }}></div>
+          <div
+            className='mb-4 text-base text-neutral-600 dark:text-neutral-200'
+            dangerouslySetInnerHTML={{ __html: sanitizer(replaceTagsWithBr(props.content)) }}
+          ></div>
           <div className='mb-2 text-base text-neutral-200'>
-            <div><span className="text-neutral-400">by </span>{props.writer}</div>
+            <div>
+              <span className='text-neutral-400'>by </span>
+              {props.writer}
+            </div>
             <small>{props.date.toLocaleString()}</small>
           </div>
         </div>

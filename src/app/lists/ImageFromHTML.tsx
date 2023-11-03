@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import acorn from'../../../public/acorn.png'
+import acorn from '../../../public/acorn.png';
 
 export default function ImageFromHtml({ content }: { content: string }) {
   const [firstImageURL, setFirstImageURL] = useState<string | null>(null);
@@ -18,12 +18,20 @@ export default function ImageFromHtml({ content }: { content: string }) {
       // 이미지 URL을 추출
       const imageURL = firstImg.getAttribute('src');
       setFirstImageURL(imageURL);
+      console.log(imageURL);
+    }
+    else {
+      setFirstImageURL(null)
     }
   }, [content]);
 
   return (
     <div className=' h-[200px] dark:bg-neutral-800 rounded-t-2xl flex items-center justify-center'>
-      {!firstImageURL ? <Image className=' object-fill max-w-full max-h-full' src={acorn} alt='default Image' /> : <img className=' object-fill max-w-full max-h-full' src={firstImageURL} alt='Thumbnail' />}
+      {!firstImageURL ? (
+        <Image className=' object-fill max-w-full max-h-full' src={acorn} alt='default Image' />
+      ) : (
+        <img className=' object-fill max-w-full max-h-full' src={firstImageURL} alt='Thumbnail' />
+      )}
     </div>
   );
 }

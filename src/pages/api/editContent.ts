@@ -10,6 +10,7 @@ export default async function showDate(request: NextApiRequest, response: NextAp
     const client = (await connectDB) as any;
     const db = client.db("goodduck");
     const now: Date = new Date();
+    request.body =JSON.parse(request.body)
     if (request.method === 'POST') {
         if (request.body.title == '') {
             return response.status(500).json('제목써라')

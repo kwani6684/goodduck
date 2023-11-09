@@ -27,7 +27,7 @@ export default async function QuillEditor() {
             <h4 className='text-base pt-4 font-semibold leading-7 text-gray-900'>QuillEditor Article</h4>
             <p className='mt-1 text-sm leading-6 text-gray-600'>❗️이미지를 업로드 할 때 꼭 에디터의 <span className='text-rose-700 font-semibold'>이미지버튼</span> 을 클릭해서 업로드 해주세요🙏 (기능개발중🛠️)</p>
 
-            <Editor category={category}></Editor>
+            <Editor category={category} defaultTitle={''} defaultCategory={category[0].value} defaultValue ={''}></Editor>
           </div>
         </div>
       )}

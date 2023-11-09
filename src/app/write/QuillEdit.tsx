@@ -12,14 +12,21 @@ export interface CategoryType {
   _id: string;
   value: string;
 }
+interface EditorType {
+  category: CategoryType[];
+  defaultValue: string;
+  resultId?: string;
+  defaultTitle: string;
+  defaultCategory: string;
+}
 
 const QuillEditor = dynamic(() => import('react-quill'), { ssr: false });
 
-export default function Editor({ category }: any) {
+export default function Editor({ category, defaultValue,resultId,defaultTitle,defaultCategory }: EditorType) {
   const quillRef = useRef(null);
-  let [content, setContent] = useState('');
-  let [title, setTitle] = useState('');
-  let [thisCategory, setThisCategory] = useState('스포츠⚽️');
+  let [content, setContent] = useState(defaultValue);
+  let [title, setTitle] = useState(defaultTitle);
+  let [thisCategory, setThisCategory] = useState(defaultCategory);
   let [data, setData] = useState<PostType[]>([]);
   useEffect(() => {});
   const imageHandler = async () => {
@@ -70,7 +77,7 @@ export default function Editor({ category }: any) {
   useEffect(() => {
     console.log(thisCategory);
   }, [thisCategory]);
- 
+
   const quillModules = useMemo(() => {
     return {
       toolbar: {
@@ -82,21 +89,7 @@ export default function Editor({ category }: any) {
     };
   }, []);
 
-  const quillFormats = [
-    'header',
-    'bold',
-    'italic',
-    'underline',
-    'strike',
-    'blockquote',
-    'list',
-    'bullet',
-    'link',
-    'image',
-    'align',
-    'color',
-    'code-block',
-  ];
+  const quillFormats = ['header', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'bullet', 'link', 'image', 'align', 'color', 'code-block'];
 
   const handleEditorChange = (newContent: string) => {
     setContent(newContent);
@@ -116,8 +109,9 @@ export default function Editor({ category }: any) {
               <input
                 onChange={(e) => {
                   setTitle(e.currentTarget.value);
-                  console.log(title);
+                  
                 }}
+                defaultValue={title}
                 type='text'
                 name='title'
                 id='title'
@@ -142,6 +136,7 @@ export default function Editor({ category }: any) {
                 name='category'
                 id='category'
                 className='block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
+                defaultValue={thisCategory}
               >
                 {category.map((item: CategoryType, i: number) => {
                   return (
@@ -183,23 +178,43 @@ export default function Editor({ category }: any) {
         <button type='button' className='text-lg font-semibold leading-6 text-gray-900'>
           Cancel
         </button>
-        <Link
-          href='/lists'
-          onClick={() => {
-            fetch(`/api/postContent`, { method: 'POST', body: JSON.stringify({ title: title, category: thisCategory, content: content }) }).then(
-              (response) => {
-                if (response.ok) {
-                  console.log('yaho');
-                  // '/lists' 로 페이지 이동하는 코드
+        {defaultValue === '' ? (
+          <Link
+            href='/lists'
+            onClick={() => {
+              fetch(`/api/postContent`, { method: 'POST', body: JSON.stringify({ title: title, category: thisCategory, content: content }) }).then(
+                (response) => {
+                  if (response.ok) {
+                    console.log('yaho');
+                    // '/lists' 로 페이지 이동하는 코드
+                  }
                 }
-              }
-            );
-          }}
-          type='submit'
-          className='rounded-md bg-indigo-600 px-3 py-2 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-        >
-          Submit
-        </Link>
+              );
+            }}
+            type='submit'
+            className='rounded-md bg-indigo-600 px-3 py-2 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+          >
+            Submit
+          </Link>
+        ) : (
+          <Link
+            href='/lists'
+            onClick={() => {
+              fetch(`/api/editContent`, { method: 'POST', body: JSON.stringify({ _id:resultId, title: title, category: thisCategory, content: content }) }).then(
+                (response) => {
+                  if (response.ok) {
+                    console.log('yaho');
+                    // '/lists' 로 페이지 이동하는 코드
+                  }
+                }
+              );
+            }}
+            type='submit'
+            className='rounded-md bg-indigo-600 px-3 py-2 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+          >
+            Edit
+          </Link>
+        )}
       </div>
     </div>
   );

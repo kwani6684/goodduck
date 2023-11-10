@@ -20,6 +20,8 @@ export default async function showDate(request: NextApiRequest, response: NextAp
         writer: session?.user?.name,
         email: session?.user?.email,
         category: request.body.category,
+        likeCount: 0,
+        likeMembers:[],
         date: now,
       };
       await db.collection('post').insertOne(data);

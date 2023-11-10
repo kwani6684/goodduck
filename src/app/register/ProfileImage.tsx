@@ -10,7 +10,6 @@ export default function ProfileImage() {
       <input
         id='profileImage'
         name='profileImage'
-              
         type='file'
         accept='image/*'
         onChange={async (e) => {
@@ -39,8 +38,8 @@ export default function ProfileImage() {
               console.log(response);
 
               if (response.ok) {
-                  setSrc(url + '/' + filename);
-                  fetch('api/register')
+                setSrc(url + '/' + filename);
+                fetch('api/register');
               } else {
                 console.log('실패');
               }
@@ -50,12 +49,8 @@ export default function ProfileImage() {
         }}
       />
       <div className='flex items-center'>
-                <Image
-                  src={src}
-                  className='mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[50px] h-[50px]'
-                  alt='Avatar'
-                />
-              </div>
+        <img src={src} className='mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[50px] h-[50px]' alt='Avatar' />
+      </div>
     </div>
   );
 }

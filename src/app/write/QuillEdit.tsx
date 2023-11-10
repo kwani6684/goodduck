@@ -7,11 +7,8 @@ import Link from 'next/link';
 import aws from 'aws-sdk';
 import ReactQuill from 'react-quill';
 import Quill from 'react-quill';
+import { CategoryType } from './page';
 
-export interface CategoryType {
-  _id: string;
-  value: string;
-}
 interface EditorType {
   category: CategoryType[];
   defaultValue: string;

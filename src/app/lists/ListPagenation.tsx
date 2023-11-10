@@ -26,7 +26,6 @@ export default function ListPagenation({ post }: ListPagenationProps) {
           className='mr-4 hover:bg-yellow-800 hover:text-white hover:rounded-xl'
           onClick={() => {
             setCurrentPage(currentPage - 1);
-            console.log(itemsToShow);
           }}
           disabled={currentPage === 1}
         >
@@ -39,7 +38,6 @@ export default function ListPagenation({ post }: ListPagenationProps) {
           className='ml-4 hover:bg-yellow-800 hover:text-white hover:rounded-xl'
           onClick={() => {
             setCurrentPage(currentPage + 1);
-            console.log(itemsToShow);
           }}
           disabled={endIndex >= post.length}
         >

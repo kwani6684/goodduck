@@ -34,7 +34,7 @@ const navigation: MenuProps[] = [
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   let session: SessionType | null = await getServerSession(authOptions);
   if (session) {
-    console.log(session.user);
+    // console.log(session.user);
   }
   return (
     <html lang='en'>
@@ -68,16 +68,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <div className='hidden lg:flex lg:flex-1 lg:justify-end text-white '>
             {session ? (
               <span className='flex items-center'>
-              <div className='flex items-center'>
-                <img
-                  src={session.user.image}
-                  className='mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[50px] h-[50px]'
-                  alt='Avatar'
-                />
-              </div>
-              <span className='font-semibold ml-4 mr-4'>{session.user.name}</span>
-              <LogoutBtn />
-            </span>
+                <div className='flex items-center'>
+                  <img src={session.user.image} className='mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[50px] h-[50px]' alt='Avatar' />
+                </div>
+                <span className='font-semibold ml-4 mr-4'>{session.user.name}</span>
+                <LogoutBtn />
+              </span>
             ) : (
               <span>
                 <Link href='/register' className='font-semibold mr-4 text-white hover:text-yellow-900 '>

@@ -14,6 +14,8 @@ export interface PostType {
   writer: string;
   email: string;
   category: string;
+  likeCount: number;
+  likeMembers:string[]
   date: Date;
 }
 

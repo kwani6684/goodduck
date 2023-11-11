@@ -1,7 +1,6 @@
 import { connectDB } from '@/util/database';
 import { ObjectId } from 'mongodb';
 import Link from 'next/link';
-import ListItem from './ListItem';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import ListPreview from './ListPreview';

@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { CategoryType } from '../writev2/page';
+import { CategoryType } from '../write/page';
+
 
 export default function AddCategory() {
   let [category, setCategory] = useState('');

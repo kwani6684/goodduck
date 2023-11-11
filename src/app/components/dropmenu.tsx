@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { MenuProps } from '../layout';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 import LogoutBtn from '../account/login/LogoutBtn';
 import LoginBtn from '../account/login/LoginBtn';

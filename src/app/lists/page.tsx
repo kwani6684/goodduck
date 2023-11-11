@@ -1,9 +1,6 @@
 import { connectDB } from '@/util/database';
-import { ObjectId } from 'mongodb';
-import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
-import ListPreview from './ListPreview';
 import ListPagenation from './ListPagenation';
 
 export interface PostType {

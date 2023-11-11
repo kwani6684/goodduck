@@ -17,7 +17,6 @@ interface EditorType {
   defaultCategory: string;
 }
 
-const QuillEditor = dynamic(() => import('react-quill'), { ssr: false });
 
 export default function Editor({ category, defaultValue,resultId,defaultTitle,defaultCategory }: EditorType) {
   const quillRef = useRef(null);

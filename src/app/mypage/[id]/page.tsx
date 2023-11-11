@@ -2,7 +2,6 @@ import { PropType } from '@/app/detail/[id]/page';
 import ListPreview from '@/app/lists/ListPreview';
 import { PostType } from '@/app/lists/page';
 import { connectDB } from '@/util/database';
-import { ObjectId } from 'mongodb';
 
 let MyPage = async (props: PropType) => {
   const client = (await connectDB) as any;

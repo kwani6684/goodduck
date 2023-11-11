@@ -1,7 +1,5 @@
 'use client';
 
-import { ObjectId } from 'mongodb';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 interface CommentType {

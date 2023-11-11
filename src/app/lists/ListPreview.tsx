@@ -2,10 +2,6 @@ import Link from 'next/link';
 import { PostType } from './page';
 import ImageFromHtml from './ImageFromHTML';
 import dompurify from 'isomorphic-dompurify';
-import Like from '../components/Like';
-import { SessionType } from '../layout';
-import { authOptions } from '@/pages/api/auth/[...nextauth]';
-import { getServerSession } from 'next-auth';
 
 export default function ListPreview(props: PostType) {
   const sanitizer = dompurify.sanitize;

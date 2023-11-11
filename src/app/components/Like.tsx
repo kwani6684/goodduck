@@ -1,6 +1,5 @@
 'use client';
 
-import { Session } from 'inspector';
 import { useEffect, useState } from 'react';
 
 interface IdPropType {

@@ -13,7 +13,7 @@ export default async function Home() {
   let category: CategoryType[] = await db.collection('category').find().toArray();
 
   return (
-    <div>
+    <div >
       <div className='relative w-full py-12 px-12 bg-yellow-900'>
         <div className='relative z-10 text-center py-12'>
           <h1 className='text-white text-center text-6xl font-display font-bold '>다람쥐굴</h1>
@@ -28,7 +28,7 @@ export default async function Home() {
           <div className='max-w-md'>
             <div className='w-24 h-2 bg-yellow-800 mb-4'></div>
             <h2 className='font-display font-bold text-4xl leading-normal mb-6'>
-              다람쥐굴엔
+              다람쥐굴에는
               <br />
               <span className='text-yellow-800'>다양한 종류</span>의
               <br /> 먹을거리가 있어요.

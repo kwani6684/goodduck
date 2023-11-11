@@ -28,7 +28,7 @@ export interface SessionType {
 const navigation: MenuProps[] = [
   { name: '카테고리 추가', href: '/category' },
   { name: '글 목록', href: '/lists' },
-  { name: '마이페이지', href: '/mypage' },
+  
 ];
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -38,17 +38,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   }
   return (
     <html lang='en'>
-      <body className={inter.className}>
+      <body className={inter.className} >
         <nav className=' flex justify-between items-center bg-yellow-700 p-6 lg:px-8' aria-label='Global'>
           <div className='flex lg:flex-1'>
             <Link href='/' className='-m-1.5 p-1.5'>
-              <span className='sr-only'>Your Company</span>
-              <img className='h-8 w-auto' src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600' alt='' />
+              <span className='text-2xl font-semibold leading-6 text-white hover:text-yellow-900'>다람쥐굴</span>
             </Link>
           </div>
 
           <div className=' flex lg:hidden'>
-            <span className='mr-4 font-semibold text-white '>{session?.user.name}</span>
+            <span className='mr-4 font-semibold text-white '>{session?.user?.name}</span>
             <DropMenu menu={navigation} session={session} />
           </div>
           <div className='hidden  lg:flex lg:gap-x-12'>
@@ -58,9 +57,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               </Link>
             ))}
             {session ? (
+              <div className='hidden  lg:flex lg:gap-x-12'>
+              <Link href ={`/mypage/${session.user.email}`} className='text-sm font-semibold leading-6 text-white hover:text-yellow-900'>마이페이지</Link>
               <Link href={'/write'} className='text-sm font-semibold leading-6 text-white hover:text-yellow-900'>
                 글 작성
               </Link>
+              </div>
             ) : (
               ''
             )}
@@ -69,9 +71,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             {session ? (
               <span className='flex items-center'>
                 <div className='flex items-center'>
-                  <img src={session.user.image} className='mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[50px] h-[50px]' alt='Avatar' />
+                  <img src={session.user?.image} className='mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[50px] h-[50px]' alt='Avatar' />
                 </div>
-                <span className='font-semibold ml-4 mr-4'>{session.user.name}</span>
+                <span className='font-semibold ml-4 mr-4'>{session.user?.name}</span>
                 <LogoutBtn />
               </span>
             ) : (
@@ -86,7 +88,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         </nav>
         {children}
 
-        <footer className='flex flex-col items-center bg-yellow-800 text-center text-white '>
+        <footer className='flex mt-8 flex-col items-center bg-yellow-800 text-center text-white '>
           <div className='container pt-9'>
             <div className='mb-9 flex justify-center'>
               <a href='#!' className='mr-9 text-neutral-800 dark:text-neutral-200'>

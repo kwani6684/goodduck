@@ -18,7 +18,7 @@ const navigation: MenuProps[] = [
 export default function NavBar() {
     let { data: session } = useSession();
     return (
-        <AuthSession>
+      
        <nav className=' flex justify-between items-center bg-yellow-700 p-6 lg:px-8' aria-label='Global'>
             <div className='flex lg:flex-1'>
               <Link href='/' className='-m-1.5 p-1.5'>
@@ -68,6 +68,6 @@ export default function NavBar() {
               )}
             </div>
           </nav>
-            </AuthSession>
+         
     )
 }

@@ -1,5 +1,5 @@
 import './globals.css';
-import AuthSession from "./AuthSession";
+import AuthSession from './AuthSession';
 
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
@@ -30,7 +30,6 @@ export interface SessionType {
 const navigation: MenuProps[] = [
   { name: '카테고리 추가', href: '/category' },
   { name: '글 목록', href: '/lists' },
-  
 ];
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -40,7 +39,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // }
   return (
     <html lang='en'>
-      <body className={inter.className} >
+      <body className={inter.className}>
         {/* <nav className=' flex justify-between items-center bg-yellow-700 p-6 lg:px-8' aria-label='Global'>
           <div className='flex lg:flex-1'>
             <Link href='/' className='-m-1.5 p-1.5'>
@@ -88,7 +87,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             )}
           </div>
         </nav> */}
-        <NavBar/>
+        <AuthSession>
+          <NavBar />
+        </AuthSession>
         {children}
 
         <footer className='flex mt-8 flex-col items-center bg-yellow-800 text-center text-white '>

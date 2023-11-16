@@ -47,7 +47,7 @@ export default function ProfileImage() {
           }
         }}
       />
-      <div className='flex items-center'>
+      <div className='items-center'>
         <img src={src} className='mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[50px] h-[50px]' alt='Avatar' />
       </div>
     </div>

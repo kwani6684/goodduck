@@ -1,8 +1,6 @@
-
 import ProfileImage from './ProfileImage';
 
 export default function Register() {
-  
   return (
     <form action='api/register' method='post'>
       <div className='py-12 px-12 lg:px-80 md:px-30'>
@@ -40,7 +38,7 @@ export default function Register() {
                 />
               </div>
             </div>
-            <ProfileImage ></ProfileImage>
+            
 
             <div className='sm:col-span-4'>
               <label htmlFor='region' className='block text-sm font-medium leading-6 text-gray-900'>
@@ -95,7 +93,11 @@ export default function Register() {
                 </div>
               </div>
             </div>
-
+            <div>
+              <div className='font-semibold pb-4'>Profile image</div>
+              <div className='pb-4'>프로필 사진은 2MB이하의 이미지 파일로 업로드 해주세요</div>
+              <ProfileImage></ProfileImage>
+            </div>
             <div className='col-span-full'>
               <label htmlFor='about' className='block text-sm font-medium leading-6 text-gray-900'>
                 About
@@ -111,8 +113,6 @@ export default function Register() {
               </div>
               <p className='mt-3 text-sm leading-6 text-gray-600'>Write a few sentences about yourself.</p>
             </div>
-
-            
           </div>
         </div>
       </div>
@@ -123,7 +123,7 @@ export default function Register() {
         </button>
         <button
           type='submit'
-          className='rounded-md bg-indigo-600 px-3 py-2 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+          className='rounded-md bg-yellow-800 px-3 py-2 text-lg font-semibold text-white shadow-sm hover:bg-yellow-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
         >
           Save
         </button>

@@ -1,4 +1,5 @@
 import './globals.css';
+import AuthSession from "./AuthSession";
 
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
@@ -10,6 +11,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import LogoutBtn from './account/login/LogoutBtn';
 import Image from 'next/image';
+import NavBar from './components/NavBar';
 const inter = Inter({ subsets: ['latin'] });
 
 export interface MenuProps {
@@ -32,14 +34,14 @@ const navigation: MenuProps[] = [
 ];
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  let session: SessionType | null = await getServerSession(authOptions);
-  if (session) {
-    // console.log(session.user);
-  }
+  // let session: SessionType | null = await getServerSession(authOptions);
+  // if (session) {
+  //   // console.log(session.user);
+  // }
   return (
     <html lang='en'>
       <body className={inter.className} >
-        <nav className=' flex justify-between items-center bg-yellow-700 p-6 lg:px-8' aria-label='Global'>
+        {/* <nav className=' flex justify-between items-center bg-yellow-700 p-6 lg:px-8' aria-label='Global'>
           <div className='flex lg:flex-1'>
             <Link href='/' className='-m-1.5 p-1.5'>
               <span className='text-2xl font-semibold leading-6 text-white hover:text-yellow-900'>다람쥐굴</span>
@@ -85,7 +87,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               </span>
             )}
           </div>
-        </nav>
+        </nav> */}
+        <NavBar/>
         {children}
 
         <footer className='flex mt-8 flex-col items-center bg-yellow-800 text-center text-white '>

@@ -1,24 +1,21 @@
 import { connectDB } from './../util/database';
 import Link from 'next/link';
-import Category from './components/Category';
-import { CategoryType } from './write/page';
+import ListPreview from './lists/ListPreview';
+import { PostType } from './lists/page';
 
 export default async function Home() {
   const client = (await connectDB) as any;
   const db = client.db('goodduck');
-  let category: CategoryType[] = await db.collection('category').find().toArray();
+  let result = await db.collection('post').find().toArray();
+  let recentPost = result.reverse().slice(0, 3);
 
   return (
-    <div >
+    <div>
       <div className='relative w-full py-12 px-12 bg-yellow-900'>
-        <div className='relative z-10 text-center py-12'>
-          <h1 className='text-white text-center text-6xl font-display font-bold '>다람쥐굴</h1>
+        <div className='relative z-10 text-center py-4'>
+          <h1 className='text-white text-center text-6xl font-display font-bold '>다람쥐굴🐿️</h1>
         </div>
       </div>
-      <div className='flex justify-center'>
-        <div className='border-b-4 py-4 border-yellow-900 text-center text-4xl inline-block  font-display font-bold '>카테고리</div>
-      </div>
-      <Category category={category} />
       <div className='grid grid-cols-1 sm:grid-cols-2 '>
         <div className='bg-gray-100 py-12 px-24 flex justify-start items-center'>
           <div className='max-w-md'>
@@ -34,7 +31,7 @@ export default async function Home() {
               다람쥐굴에서 관심사를 공유해보세요!!
             </p>
             <Link
-              href='/'
+              href='/category'
               className='inline-block border-2 border-yellow-800 font-light text-yellow-800 text-sm uppercase tracking-widest py-3 px-8 hover:bg-yellow-800 hover:text-white'
             >
               카테고리 보러가기
@@ -62,6 +59,14 @@ export default async function Home() {
             </Link>
           </div>
         </div>
+      </div>
+      <div className='flex pt-4 justify-center'>
+        <div className='border-b-4 pt-4 border-yellow-900 text-center text-3xl inline-block  font-display font-bold '>최근 게시글</div>
+      </div>
+      <div className='px-24 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-6 p-4 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
+        {recentPost.map((item: PostType, i: number) => (
+          <ListPreview {...item} key={i} />
+        ))}
       </div>
     </div>
   );

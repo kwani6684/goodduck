@@ -21,10 +21,11 @@ export default async function Detail(props: PropType) {
   let result = await db.collection('post').findOne({ _id: new ObjectId(props.params.id) });
   let writer = await db.collection('userinfo').findOne({ username: result.writer });
   let content = result.content;
+
   const sanitizer = dompurify.sanitize;
-  console.log(props);
   let isLike = false;
-  if (result.likeMembers!==undefined &&result.likeMembers.includes(session?.user.email)) {
+
+  if (result.likeMembers !== undefined && result.likeMembers.includes(session?.user.email)) {
     isLike = true;
   }
   return (
@@ -57,7 +58,11 @@ export default async function Detail(props: PropType) {
                 <div className='pl-8 mt-2 text-sm font-light'>{writer.about}</div>
               </div>
             </div>
-            <Like resultId={result._id.toString()} likeCount={result.likeCount} isLike={isLike} />
+            {session ? (
+              <Like resultId={result._id.toString()} likeCount={result.likeCount} isLike={isLike} />
+            ) : (
+              <div className='pt-4 flex justify-center'>로그인을 해서 좋아요를 눌러보세요!</div>
+            )}
           </div>
         </div>
 

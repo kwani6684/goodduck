@@ -10,7 +10,7 @@ import AuthSession from "../AuthSession";
 import { useSession } from "next-auth/react";
 
 const navigation: MenuProps[] = [
-    { name: '카테고리 추가', href: '/category' },
+    { name: '카테고리', href: '/category' },
     { name: '글 목록', href: '/lists' },
 ];
 

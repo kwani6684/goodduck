@@ -175,7 +175,7 @@ export default function Editor({ category, defaultValue,resultId,defaultTitle,de
           Cancel
         </button>
         {defaultValue === '' ? (
-          <Link
+          <a
             href='/lists'
             onClick={() => {
               fetch(`/api/postContent`, { method: 'POST', body: JSON.stringify({ title: title, category: thisCategory, content: content }) }).then(
@@ -191,9 +191,9 @@ export default function Editor({ category, defaultValue,resultId,defaultTitle,de
             className='rounded-md bg-yellow-800 px-3 py-2 text-lg font-semibold text-white shadow-sm hover:bg-yellow-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
           >
             Submit
-          </Link>
+          </a>
         ) : (
-          <Link
+          <a
             href='/lists'
             onClick={() => {
               fetch(`/api/editContent`, { method: 'POST', body: JSON.stringify({ _id:resultId, title: title, category: thisCategory, content: content }) }).then(
@@ -209,7 +209,7 @@ export default function Editor({ category, defaultValue,resultId,defaultTitle,de
             className='rounded-md bg-yellow-800 px-3 py-2 text-lg font-semibold text-white shadow-sm hover:bg-yellow-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
           >
             Edit
-          </Link>
+          </a>
         )}
       </div>
     </div>

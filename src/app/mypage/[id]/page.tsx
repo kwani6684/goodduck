@@ -7,12 +7,11 @@ let MyPage = async (props: PropType) => {
   const client = (await connectDB) as any;
   const db = client.db('goodduck');
   let user = await db.collection('userinfo').findOne({ email: decodeURIComponent(props.params.id) });
-  let postList = await db
+  let result = await db
     .collection('post')
     .find({ email: decodeURIComponent(props.params.id) })
     .toArray();
-  console.log(user);
-  console.log(props.params);
+  const post = result.reverse();
   return (
     <div>
       <div className='bg-white py-24 sm:py-32'>
@@ -28,10 +27,10 @@ let MyPage = async (props: PropType) => {
           </div>
           <div className='flex justify-center items-center'>
           <div className='text-3xl font-bold tracking-tight text-gray-900 sm:text-2xl'>내 글</div>
-          <div className='ml-4 rounded-full p-2 border border-yellow-800 text-yellow-800'>{postList.length }</div>
+          <div className='ml-4 rounded-full p-2 border border-yellow-800 text-yellow-800'>{post.length }</div>
           </div>
           <div className='mx-auto mt-4 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-6 border-t border-gray-200  sm:mt-4 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
-            {postList.map((item: PostType, i: number) => (
+            {post.map((item: PostType, i: number) => (
               <ListPreview {...item} key={i} />
             ))}
           </div>

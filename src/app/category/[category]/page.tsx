@@ -15,8 +15,7 @@ export default async function CategoryList(props: PropType) {
     .collection('post')
     .find({ category: thisCategory })
     .toArray();
-  console.log(result);
-  console.log(props)
+  const post = result.reverse()
   return (
     <div className='bg-white py-24 sm:py-32'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
@@ -25,7 +24,7 @@ export default async function CategoryList(props: PropType) {
           <p className='mt-2 text-lg leading-8 text-gray-600'>{thisCategory}에 대한 이야기를 나누는 다람쥐굴이에요.</p>
         </div>
         <div className='mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-6 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
-          {result.map((item: PostType, i: number) => (
+          {post.map((item: PostType, i: number) => (
             <ListPreview {...item} key={i} />
           ))}
         </div>

@@ -92,7 +92,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         </AuthSession>
         {children}
 
-        <footer className='flex mt-8 flex-col items-center bg-yellow-800 text-center text-white '>
+        <footer className='flex flex-col items-center bg-yellow-800 text-center text-white '>
           <div className='container pt-9'>
             <div className='mb-9 flex justify-center'>
               <a href='#!' className='mr-9 text-neutral-800 dark:text-neutral-200'>

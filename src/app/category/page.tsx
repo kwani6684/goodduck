@@ -11,7 +11,6 @@ export default async function Category() {
   const db = client.db('goodduck');
   let postCount = await db.collection('post').find({ email: session?.user.email }).toArray();
   let commentCount = await db.collection('comment').find({ email: session?.user.email }).toArray();
-  console.log(postCount.length);
   if (session?.user.role === 'normal') {
     if (commentCount.length>4 && postCount.length > 2) {
       await db.collection('userinfo').updateOne({ email: session?.user.email }, { $set: { role: 'squriell' } });

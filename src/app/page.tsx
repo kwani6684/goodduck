@@ -8,6 +8,7 @@ export default async function Home() {
   const db = client.db('goodduck');
   let result = await db.collection('post').find().toArray();
   let recentPost = result.reverse().slice(0, 3);
+  console.log(recentPost)
 
   return (
     <div>
@@ -63,7 +64,7 @@ export default async function Home() {
       <div className='flex pt-4 justify-center'>
         <div className='border-b-4 pt-4 border-yellow-900 text-center text-3xl inline-block  font-display font-bold '>최근 게시글</div>
       </div>
-      <div className='px-24 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-6 p-4 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
+      <div className='mx-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-6 p-4 lg:mx-16 lg:max-w-none lg:grid-cols-3'>
         {recentPost.map((item: PostType, i: number) => (
           <ListPreview {...item} key={i} />
         ))}

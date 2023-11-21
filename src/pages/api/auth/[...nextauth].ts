@@ -10,11 +10,11 @@ interface CustomCredentials {
 }
 interface Token {
   // 여기에 토큰과 관련된 필드 정의
-  user?: { name: string; email: string };
+  user?: { name: string; email: string,_id: string; };
   // 다른 필드도 추가 가능
 }
 export const authOptions: AuthOptions = {
-  providers: [
+  providers: [ 
     CredentialsProvider({
       //1. 로그인페이지 폼 자동생성해주는 코드
       name: 'credentials',
@@ -62,6 +62,7 @@ export const authOptions: AuthOptions = {
     jwt: async ({ token, user }: any) => {
       if (user) {
         token.user = {};
+        token.user._id = user._id;
         token.user.name = user.username;
         token.user.email = user.email;
         token.user.role = user.role;

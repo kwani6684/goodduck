@@ -45,7 +45,7 @@ const DropMenu = ({ menu, session }: { menu: MenuProps[]; session: any }) => {
             </Link>
           )}
           {session ? (
-            <Link href={`/mypage/${session.user.email}`} className='border-b-4 border-yellow-600 text-sm font-semibold leading-6 text-white py-3'>
+            <Link href={`/mypage/${session.user.email.substring(0,session.user.email.indexOf('@'))}`} className='border-b-4 border-yellow-600 text-sm font-semibold leading-6 text-white py-3'>
             마이페이지
           </Link>
           ):('')}

@@ -7,10 +7,11 @@ export default async function showDate(request: NextApiRequest, response: NextAp
   let session = await getServerSession(request, response, authOptions);
   const client = (await connectDB) as any;
   const db = client.db('goodduck');
+  let userinfo =await db.collection('userinfo').findOne({ email: session?.user?.email});
   const req = request.body;
   let imageUrl = `https://goodduckbucket.s3.ap-northeast-2.amazonaws.com/${encodeURIComponent(req.profileImage)}`;
   if (req.profileImage === '') {
-    imageUrl = `https://goodduckbucket.s3.ap-northeast-2.amazonaws.com/default/sqirell.jpg`;
+    imageUrl = userinfo.image;
   }
   if (request.method === 'POST') {
     try {

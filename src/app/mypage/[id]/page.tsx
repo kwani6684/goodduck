@@ -30,13 +30,13 @@ let MyPage = async (props: PropType) => {
               <div className='pl-8 text-4xl font-semibold'>{user.username}</div>
               <div className='flex space-between'>
                 <div className='pl-8 mt-2 text-lg font-light'>{user.about}</div>
-                {/* {session?.user.email === decodeURIComponent(props.params.id) ? ( */}
+                {session?.user.email?.substring(0,session?.user.email?.indexOf('@'))=== decodeURIComponent(props.params.id) ? (
                   <Link href={`./${decodeURIComponent(props.params.id)}/edit`} className='pl-8 mt-2 text-lg '>
                     수정
                   </Link>
-                {/* ) : (
+                 ) : (
                   ''
-                )} */}
+                )} 
               </div>
             </div>
           </div>

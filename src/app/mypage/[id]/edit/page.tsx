@@ -1,9 +1,9 @@
 import ProfileImage from "@/app/register/ProfileImage";
 
 
-export default function Register() {
+export default function MypageEdit() {
   return (
-    <form action='api/editUserInfo' method='post'>
+    <form action='/api/editUserInfo' method='post'>
       <div className='py-12 px-12 lg:px-80 md:px-30'>
        
 
@@ -33,7 +33,7 @@ export default function Register() {
             <div>
               <div className='font-semibold pb-4'>Profile image</div>
               <div className='pb-4'>프로필 사진은 2MB이하의 이미지 파일로 업로드 해주세요</div>
-              <ProfileImage></ProfileImage>
+              <ProfileImage types='editUserInfo'></ProfileImage>
             </div>
             <div className='col-span-full'>
               <label htmlFor='about' className='block text-sm font-medium leading-6 text-gray-900'>

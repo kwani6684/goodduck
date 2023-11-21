@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 
-export default function ProfileImage() {
+
+export default function ProfileImage({types}:{types:string}) {
   let [src, setSrc] = useState('');
   return (
     <div>
@@ -16,7 +17,7 @@ export default function ProfileImage() {
             let file = e.currentTarget.files[0];
             let filename = encodeURIComponent(file.name);
 
-            let res = await fetch(`api/postProfileImage?file=${filename}`);
+            let res = await fetch(`/api/postProfileImage?file=${filename}`);
             let resData = await res.json();
 
             if ('fields' in resData && 'url' in resData) {
@@ -38,7 +39,7 @@ export default function ProfileImage() {
 
               if (response.ok) {
                 setSrc(url + '/' + filename);
-                fetch('api/register');
+                fetch('/api/register');
               } else {
                 console.log('실패');
               }

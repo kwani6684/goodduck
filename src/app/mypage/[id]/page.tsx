@@ -31,7 +31,7 @@ let MyPage = async (props: PropType) => {
               <div className='flex space-between'>
                 <div className='pl-8 mt-2 text-lg font-light'>{user.about}</div>
                 {/* {session?.user.email === decodeURIComponent(props.params.id) ? ( */}
-                  <Link href={`/mypage/${decodeURIComponent(props.params.id)}/edit`} className='pl-8 mt-2 text-lg '>
+                  <Link href={`mypage/${decodeURIComponent(props.params.id)}/edit`} className='pl-8 mt-2 text-lg '>
                     수정
                   </Link>
                 {/* ) : (

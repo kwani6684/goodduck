@@ -2,9 +2,12 @@
 
 import { useState } from 'react';
 
-
-export default function ProfileImage({types}:{types:string}) {
-  let [src, setSrc] = useState('');
+interface ProfileImageType{
+  types: string,
+  image:string,
+}
+export default function ProfileImage({types,image}:ProfileImageType) {
+  let [src, setSrc] = useState(image);
   return (
     <div>
       <input
@@ -39,7 +42,7 @@ export default function ProfileImage({types}:{types:string}) {
 
               if (response.ok) {
                 setSrc(url + '/' + filename);
-                fetch('/api/register');
+                fetch(`/api/${types}`);
               } else {
                 console.log('실패');
               }

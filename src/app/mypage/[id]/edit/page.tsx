@@ -1,8 +1,17 @@
+import { SessionType } from "@/app/layout";
 import ProfileImage from "@/app/register/ProfileImage";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { connectDB } from "@/util/database";
+import { getServerSession } from "next-auth";
 
 
-export default function MypageEdit() {
+export default async function MypageEdit() {
+  let session: SessionType | null = await getServerSession(authOptions);
+  const client = (await connectDB) as any;
+  const db = client.db('goodduck');
+  let userinfo =await db.collection('userinfo').findOne({ email: session?.user.email});
   return (
+    
     <form action='/api/editUserInfo' method='post'>
       <div className='py-12 px-12 lg:px-80 md:px-30'>
        
@@ -26,6 +35,7 @@ export default function MypageEdit() {
                     autoComplete='username'
                     className='block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
                     placeholder='콰니'
+                    defaultValue={userinfo.username}
                   />
                 </div>
               </div>
@@ -33,7 +43,7 @@ export default function MypageEdit() {
             <div>
               <div className='font-semibold pb-4'>Profile image</div>
               <div className='pb-4'>프로필 사진은 2MB이하의 이미지 파일로 업로드 해주세요</div>
-              <ProfileImage types='editUserInfo'></ProfileImage>
+              <ProfileImage types='editUserInfo'image={userinfo.image}></ProfileImage>
             </div>
             <div className='col-span-full'>
               <label htmlFor='about' className='block text-sm font-medium leading-6 text-gray-900'>
@@ -45,7 +55,7 @@ export default function MypageEdit() {
                   name='about'
                   rows={3}
                   className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
-                  defaultValue={''}
+                  defaultValue={userinfo.about}
                 />
               </div>
               <p className='mt-3 text-sm leading-6 text-gray-600'>Write a few sentences about yourself.</p>

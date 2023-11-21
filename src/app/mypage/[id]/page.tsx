@@ -12,10 +12,10 @@ let MyPage = async (props: PropType) => {
 
   const client = (await connectDB) as any;
   const db = client.db('goodduck');
-  let user = await db.collection('userinfo').findOne({ email: decodeURIComponent(props.params.id) });
+  let user = await db.collection('userinfo').findOne({ email: { $regex: `^${decodeURIComponent(props.params.id)}` } });
   let result = await db
     .collection('post')
-    .find({ email: decodeURIComponent(props.params.id) })
+    .find({ email: { $regex: `^${decodeURIComponent(props.params.id)}` } })
     .toArray();
   const post = result.reverse();
   return (

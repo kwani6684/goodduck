@@ -39,7 +39,7 @@ export default function NavBar() {
         ))}
         {session?.user ? (
           <div className='hidden  lg:flex lg:gap-x-12'>
-            <Link href={`/mypage/${session?.id}`} className='text-sm font-semibold leading-6 text-white hover:text-yellow-900'>
+            <Link href={`/mypage/${session?.user.email?.substring(0,session?.user.email?.indexOf('@'))}`} className='text-sm font-semibold leading-6 text-white hover:text-yellow-900'>
               마이페이지
             </Link>
             <Link href={'/write'} className='text-sm font-semibold leading-6 text-white hover:text-yellow-900'>

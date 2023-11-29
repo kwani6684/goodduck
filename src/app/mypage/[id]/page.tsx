@@ -5,6 +5,7 @@ import { PostType } from '@/app/lists/page';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { connectDB } from '@/util/database';
 import { getServerSession } from 'next-auth';
+import Image from 'next/image';
 import Link from 'next/link';
 
 let MyPage = async (props: PropType) => {
@@ -24,7 +25,7 @@ let MyPage = async (props: PropType) => {
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
           <div className='p-4 flex justify-start items-center'>
             <div className='flex items-center'>
-              <img src={user.image} className='mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[150px] h-[150px]' alt='Avatar' />
+              <Image width={150} height={150} src={user.image} className='mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[150px] h-[150px]' alt='Avatar' />
             </div>
             <div>
               <div className='pl-8 text-4xl font-semibold'>{user.username}</div>

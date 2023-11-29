@@ -26,11 +26,11 @@ export default function ImageFromHtml({ content }: { content: string }) {
   }, [content]);
 
   return (
-    <div className=' h-[200px] dark:bg-neutral-800 rounded-t-2xl flex items-center justify-center'>
+    <div className=' h-[200px] relative dark:bg-neutral-800 rounded-t-2xl flex items-center justify-center'>
       {!firstImageURL ? (
-        <Image className=' object-fill max-w-full max-h-full' src={acorn} alt='default Image' />
+        <Image className=' object-contain max-w-full max-h-full' src={acorn} fill alt='default Image' />
       ) : (
-        <img className=' object-fill max-w-full max-h-full' src={firstImageURL} alt='Thumbnail' />
+        <Image className=' object-contain max-w-full max-h-full' src={firstImageURL} fill alt='Thumbnail' />
       )}
     </div>
   );

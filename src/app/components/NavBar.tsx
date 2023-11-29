@@ -7,6 +7,7 @@ import { MenuProps, SessionType } from '../layout';
 import AuthSession from '../AuthSession';
 import { useSession } from 'next-auth/react';
 import { Session } from 'next-auth';
+import Image from 'next/image';
 
 interface CustomSession extends Session {
   id?: string | null | undefined;
@@ -54,9 +55,11 @@ export default function NavBar() {
         {session?.user ? (
           <span className='flex items-center'>
             <div className='flex items-center'>
-              <img
+              <Image
+                width={50}
+                height={50}
                 src={session?.user.image || '../public/acorn.png'}
-                className='mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[50px] h-[50px]'
+                className='mx-auto rounded-full shadow-lg dark:shadow-black/20 '
                 alt='Avatar'
               />
             </div>

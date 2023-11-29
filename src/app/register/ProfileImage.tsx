@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 
 interface ProfileImageType{
@@ -52,7 +53,7 @@ export default function ProfileImage({types,image}:ProfileImageType) {
         }}
       />
       <div className='items-center'>
-        <img src={src} className='mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[50px] h-[50px]' alt='Avatar' />
+        <Image width={50} height={50} src={src} className='mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[50px] h-[50px]' alt='Avatar' />
       </div>
     </div>
   );

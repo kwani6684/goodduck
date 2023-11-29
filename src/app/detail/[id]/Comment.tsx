@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 interface CommentType {
@@ -76,7 +77,7 @@ export default function Comment({ resultId }: any) {
             <div key={i}>
               <div className='flex items-center pt-4' >
                 <div className='flex items-center'>
-                  <img src={item.url} className='mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[50px] h-[50px]' alt='Avatar' />
+                  <Image width={50}height={50} src={item.url} className='mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[50px] h-[50px]' alt='Avatar' />
                 </div>
                 <span className='pl-4 font-semibold'>{item.writer}</span>
                 <span className='pl-4'>{item.comment}</span>

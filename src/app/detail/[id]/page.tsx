@@ -8,6 +8,7 @@ import Like from '@/app/components/Like';
 import { SessionType } from '@/app/layout';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import Image from 'next/image';
 export interface PropType {
   params: {
     id: string;
@@ -51,7 +52,7 @@ export default async function Detail(props: PropType) {
             <div className='mt-8 mb-32' dangerouslySetInnerHTML={{ __html: sanitizer(content) }} />
             <div className='pt-4 flex justify-start items-center'>
               <div className='flex items-center'>
-                <img src={writer.image} className='mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[75px] h-[75px]' alt='Avatar' />
+                <Image width={75} height={75} src={writer.image} className='mx-auto rounded-full shadow-lg dark:shadow-black/20' alt='Avatar' />
               </div>
               <div>
                 <div className='pl-8 text-2xl font-semibold'>{writer.username}</div>

@@ -1,17 +1,22 @@
-import { connectDB } from "@/util/database";
-import ListPreview from "../lists/ListPreview";
-import { PostType } from "../lists/page";
+'use client';
 
-export default async function RecentPost() {
-    const client = (await connectDB) as any;
-    const database = client.db('goodduck');
-    let result = await database.collection('post').find().sort({ date: -1 }).limit(3).toArray();
-    
-    return (
-        <div className='mx-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-6 p-4 lg:mx-16 lg:max-w-none lg:grid-cols-3'>
-        {result.map((item: PostType, i: number) => (
-          <ListPreview {...item} key={i} />
-        ))}
-      </div>
-    )
+import ListPreview from '../lists/ListPreview';
+import { PostType } from '../lists/page';
+import { useEffect, useState } from 'react';
+
+export default function RecentPost() {
+  let [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/getRecentPost')
+      .then((r) => r.json())
+      .then((result) => setData(result));
+  }, []);
+  return (
+    <div className='mx-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-6 p-4 lg:mx-16 lg:max-w-none lg:grid-cols-3'>
+      {data.map((item: PostType, i: number) => (
+        <ListPreview {...item} key={i} />
+      ))}
+    </div>
+  );
 }

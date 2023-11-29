@@ -2,7 +2,6 @@ import { connectDB } from '@/util/database';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import ListPagenation from './ListPagenation';
-import { revalidatePath } from "next/cache" //페이지 상단에 추가
 export interface PostType {
   _id: string;
   title: string;
@@ -22,7 +21,6 @@ export default async function List() {
   let session = await getServerSession(authOptions);
   let result = await db.collection('post').find().toArray();
   let post = result.reverse();
-  revalidatePath('/lists')
   return (
     <div className='bg-white py-24 sm:py-32'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>

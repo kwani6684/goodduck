@@ -1,13 +1,12 @@
 import { connectDB } from './../util/database';
 import Link from 'next/link';
-import ListPreview from './lists/ListPreview';
-import { PostType } from './lists/page';
-
+import { revalidatePath } from "next/cache" 
+import RecentPost from './components/RecentPost';
 export default async function Home() {
   const client = (await connectDB) as any;
-  const db = client.db('goodduck');
-  let result = await db.collection('post').find().sort({ date: -1 }).limit(3).toArray();
-
+  const database = client.db('goodduck');
+  let result = await database.collection('post').find().sort({ date: -1 }).limit(3).toArray();
+  revalidatePath('/');
   return (
     <div>
       <div className='relative w-full py-12 px-12 bg-yellow-900'>
@@ -62,11 +61,7 @@ export default async function Home() {
       <div className='flex pt-4 justify-center'>
         <div className='border-b-4 pt-4 border-yellow-900 text-center text-3xl inline-block  font-display font-bold '>최근 게시글</div>
       </div>
-      <div className='mx-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-6 p-4 lg:mx-16 lg:max-w-none lg:grid-cols-3'>
-        {result.map((item: PostType, i: number) => (
-          <ListPreview {...item} key={i} />
-        ))}
-      </div>
+      <RecentPost result ={result}/>
     </div>
   );
 }

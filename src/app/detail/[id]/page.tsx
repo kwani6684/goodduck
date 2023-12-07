@@ -9,6 +9,7 @@ import { SessionType } from '@/app/layout';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import Image from 'next/image';
+import AuthSession from '@/app/AuthSession';
 export interface PropType {
   params: {
     id: string;
@@ -66,8 +67,9 @@ export default async function Detail(props: PropType) {
             )}
           </div>
         </div>
-
-        <Comment resultId={result._id.toString()} />
+        <AuthSession>
+          <Comment resultId={result._id.toString()} />
+        </AuthSession>
       </div>
     </div>
   );

@@ -2,21 +2,17 @@ import './globals.css';
 import AuthSession from './AuthSession';
 
 import { Inter } from 'next/font/google';
-import Link from 'next/link';
 
-import DropMenu from './components/dropmenu';
-import LoginBtn from './account/login/LoginBtn';
-
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/pages/api/auth/[...nextauth]';
-import LogoutBtn from './account/login/LogoutBtn';
-import Image from 'next/image';
 import NavBar from './components/NavBar';
 const inter = Inter({ subsets: ['latin'] });
 
 export interface MenuProps {
   name: string;
   href: string;
+}
+export const metadata = {
+  title: '다람쥐굴 블로그',
+  description:'유저가 직접 카테고리를 추가해서 다양한 종류의 글을 볼 수 있는 블로그 입니다.'
 }
 export interface SessionType {
   user: {
@@ -27,19 +23,13 @@ export interface SessionType {
   };
 }
 
-const navigation: MenuProps[] = [
-  { name: '카테고리 추가', href: '/category' },
-  { name: '글 목록', href: '/lists' },
-];
+
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   
   return (
     <html lang='en'>
-      <head>
-        <title>다람쥐굴 블로그</title>
-        <meta name='description' content='유저가 직접 카테고리를 추가해서 다양한 종류의 글을 볼 수 있는 블로그 입니다.' />
-      </head>
+      
       <body className={inter.className}>
         <AuthSession>
           <NavBar />
